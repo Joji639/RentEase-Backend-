@@ -1,0 +1,73 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+*.secret
+*.pem
+*.key
+
+# Django generated files
+*.log
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+static_collected/
+
+# Celery generated state
+celerybeat-schedule
+celerybeat-schedule.*
+
+# Redis/database dumps
+*.rdb
+dump.rdb
+
+# Test, coverage, and type-checker output
+.pytest_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.hypothesis/
+.mypy_cache/
+.pyre/
+.ruff_cache/
+
+# Build and packaging output
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+MANIFEST
+
+# IDE and editor files
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+api documentations of rentease/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
