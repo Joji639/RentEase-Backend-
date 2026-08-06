@@ -76,6 +76,7 @@ class TechnicianOnboardingSerializer(serializers.ModelSerializer):
 class TechnicianProfileSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source="user.email", read_only=True)
     full_name = serializers.CharField(source="user.full_name", read_only=True)
+    is_two_factor_enabled = serializers.BooleanField(source="user.is_two_factor_enabled", read_only=True)
     specialization = ServiceCategoryPublicSerializer(read_only=True)
     specialization_id = serializers.PrimaryKeyRelatedField(
         source="specialization", queryset=ServiceCategory.objects.filter(is_active=True),
@@ -90,7 +91,7 @@ class TechnicianProfileSerializer(serializers.ModelSerializer):
             "profile_image", "license_number", "license_document",
             "pan_number", "pan_card_document", "certification_document",
             "verification_status", "rejection_reason", "submitted_at", "reviewed_at",
-            "address", "latitude", "longitude",
+            "address", "latitude", "longitude", "is_two_factor_enabled",
          ]
         read_only_fields = [f for f in fields if f != "specialization_id"]
 

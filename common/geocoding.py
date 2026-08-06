@@ -15,7 +15,6 @@ def geocode_address(address: str):
     cached = cache.get(key)
     if cached is not None:
         return cached
-
     try:
         response = requests.get(
             NOMINATIM_URL,

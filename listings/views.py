@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 import razorpay
 from django.conf import settings
 from .models import Booking
-from rag.services import index_listing
+from listings.tasks import index_listing_task
 from notifications.services import send_push_notification, NotificationService
 
 User = get_user_model()
@@ -62,7 +62,7 @@ class ListingListCreateView(APIView):
         for img in request.FILES.getlist("images"):
             ListingImage.objects.create(listing=listing, image=img)
 
-        index_listing(listing)  # embed listing for RAG semantic search
+        index_listing_task.delay(listing.id)  # embed listing for RAG in celery worker
 
         return APIResponse.success(
             data=ListingSerializer(listing, context={"request": request}).data,
@@ -119,7 +119,7 @@ class ListingDetailView(APIView):
                 listing.latitude, listing.longitude = coords
                 listing.save(update_fields=["latitude", "longitude"])
 
-        index_listing(listing)  # re-embed listing after update
+        index_listing_task.delay(listing.id)  # re-embed listing in celery worker
 
         return APIResponse.success(
             data=ListingSerializer(listing, context={"request": request}).data,
